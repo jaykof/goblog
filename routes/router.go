@@ -1,11 +1,19 @@
 package routes
 
-import "github.com/gorilla/mux"
+import (
+	"encoding/json"
+	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+)
 
 // 返回一个 mux.Router 类型指针，从而可以当作处理器使用
 func NewRouter() *mux.Router {
 	// 创建 mux.Router 路由器示例
 	router := mux.NewRouter().StrictSlash(true)
+
+	// 应用请求日志中间件
+	router.Use(loggingRequestInfo)
 
 	// 遍历 web.go 中定义的所有 webRoutes
 	for _, route := range webRoutes {
@@ -17,4 +25,16 @@ func NewRouter() *mux.Router {
 	}
 
 	return router
+}
+
+// 记录请求日志信息中间件
+func loggingRequestInfo(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// 打印请求URL明细
+		url, _ := json.Marshal(r.URL)
+		log.Println(string(url))
+		log.Printf("User Agent: %s\n", r.Header.Get("User-Agent"))
+		log.Printf("Request Header: %v\n", r.Header)
+		next.ServeHTTP(w, r)
+	})
 }

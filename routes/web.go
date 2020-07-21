@@ -7,9 +7,9 @@ import (
 
 // 定义一个 WebRoute 结构体用于存放单个路由
 type WebRoute struct {
-	Name string
-	Method string
-	Pattern string
+	Name        string
+	Method      string
+	Pattern     string
 	HandlerFunc http.HandlerFunc
 }
 
@@ -35,5 +35,35 @@ var webRoutes = WebRoutes{
 		"GET",
 		"/user/{id}",
 		handlers.GetUser,
+	},
+	WebRoute{
+		"NewPost",
+		"POST",
+		"/post/add",
+		handlers.AddPost,
+	},
+	WebRoute{
+		"NewPost2",
+		"POST",
+		"/post/add2",
+		handlers.AddPost2,
+	},
+	WebRoute{
+		"UpdatePost",
+		"POST",
+		"/post/edit",
+		handlers.EditPost,
+	},
+	WebRoute{
+		"UpdatePost2",
+		"POST",
+		"/post/edit2",
+		handlers.EditPost2,
+	},
+	WebRoute{
+		"UploadImage",
+		"POST",
+		"/image/upload",
+		handlers.UploadImage,
 	},
 }
