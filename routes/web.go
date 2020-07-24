@@ -66,4 +66,40 @@ var webRoutes = WebRoutes{
 		"/image/upload",
 		handlers.UploadImage,
 	},
+	WebRoute{
+		"ApiError",
+		"GET",
+		"/error",
+		handlers.Error,
+	},
+	WebRoute{
+		"Redirect",
+		"GET",
+		"/redirect",
+		handlers.Redirect,
+	},
+	WebRoute{
+		"SetCookie",
+		"GET",
+		"/setcookies",
+		handlers.SetCookie,
+	},
+	WebRoute{
+		"GetCookie",
+		"GET",
+		"/getcookies",
+		handlers.GetCookie,
+	},
+	WebRoute{
+		"SetMessage",
+		"GET",
+		"/set_welcome_message",
+		handlers.SetWelcomeMessage,
+	},
+	WebRoute{
+		"GetMessage",
+		"GET",
+		"/get_welcome_message",
+		handlers.GetWelcomeMessage,
+	},
 }
